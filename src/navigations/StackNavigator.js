@@ -6,11 +6,12 @@ const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="LoginScreen"
+      initialRouteName="HomeScreen"
       screenOptions={{
         headerStyle: {backgroundColor: '#9AC4F8'},
         headerTintColor: 'white',
         headerBackTitle: 'Back',
+        headerShown: false,
       }}>
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
