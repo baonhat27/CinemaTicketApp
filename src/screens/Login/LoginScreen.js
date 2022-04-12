@@ -1,11 +1,17 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import styles from "./LoginScreen.scss"
+import {View, Text, Button} from 'react-native';
+import React from 'react';
+import styles from './LoginScreen.scss';
 
-export default function LoginScreen() {
+export default function LoginScreen({navigation}) {
   return (
-    <View className={styles.test}>
-      <Text>LoginScreen</Text>
+    <View className={styles.login}>
+      <View className={styles.test}>
+        <Button
+          className={styles.button}
+          onPress={() => navigation.navigate('MovieScreen')}
+          title="Clickkkkkk"
+        />
+      </View>
     </View>
-  )
+  );
 }
