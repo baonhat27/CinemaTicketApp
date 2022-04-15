@@ -6,7 +6,7 @@ export default function WrapImage({width, height, source}) {
     <View>
       <Image
         source={{uri: source}}
-        style={{width: width, height: height}}
+        style={{width: width, height: height,borderRadius: 10}}
         resizeMode='cover'
       />
     </View>
