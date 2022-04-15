@@ -1,9 +1,4 @@
-.homescreen {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  background-color: #263238;
-}
+
 .home_header {
   display: flex;
   justify-content: space-between;
@@ -17,38 +12,14 @@
   color: #ffffff;
   margin: 0px 30px;
 }
-.home_comingsoon_film {
-  margin: 0px 0;
-  width: 100%;
-}
 .header {
   color: #ffffff;
   font-size: 25px;
   margin: 10px 0 10px 0;
-  padding: 0 0 0 30px
-}
-.home_comingsoon_film_card {
-  width: 330px;
-  height: 180px;
-  border: 1px solid red;
-  margin: 0 auto;
+  padding: 0 0 0 30px;
 }
 
 .isPress{
   background-color: red;
 }
-.home_nowShowing_film {
-  display: flex;
-  width: 100%;
-}
-.home_nowShowing_film_card{
-  width: 200px;
-  height: 300px;
-  border: 1px solid red;
-  margin: 0 auto;
-}
-.home_nowShowing_film_title {
-  color: #ffffff;
-  font-size: 15px;
-  margin: 0 auto;
-}
+

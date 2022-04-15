@@ -1,24 +1,25 @@
 import {View, Text} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './Category.scss';
+import {HomeContext} from '../../../../context';
 
 export default function CategoryItem({
   categoryItem,
   checkClick,
   index,
   handleCheckClick,
-  handleCategory
 }) {
+  const {handleCategory, setSelectedId, selectedId} = useContext(HomeContext);
   return (
     <Text
       className={
-        checkClick[index]
+        index === selectedId 
           ? styles.home_category_item_pressed
           : styles.home_category_item
       }
       onPress={() => {
         handleCategory(categoryItem);
-        handleCheckClick(index);
+        setSelectedId(index);
       }}>
       {categoryItem}
     </Text>

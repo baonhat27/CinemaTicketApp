@@ -1,5 +1,5 @@
 import HomeScreen from './Home/HomeScreen';
-import MovieScreen from './Movie/MovieScreen';
+import FilmScreen from './Film/FilmScreen';
 import LoginScreen from './Login/LoginScreen';
 
-export {HomeScreen, MovieScreen, LoginScreen};
+export {HomeScreen, FilmScreen, LoginScreen};
