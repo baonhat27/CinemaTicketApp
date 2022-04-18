@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-export default function CustomButton({width, height, content}) {
+export default function CustomButton({width, height, content, onPress}) {
   return (
     <TouchableOpacity
       style={{
@@ -11,9 +11,12 @@ export default function CustomButton({width, height, content}) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
-      }}>
-      <Text style={{color: '#ffffff', fontSize:16, fontWeight:'600'}}>{content}</Text>
+        borderRadius: 10,
+      }}
+      onPress={onPress}>
+      <Text style={{color: '#ffffff', fontSize: 16, fontWeight: '600'}}>
+        {content}
+      </Text>
     </TouchableOpacity>
   );
 }

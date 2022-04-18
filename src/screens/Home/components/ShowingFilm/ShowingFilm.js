@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import styles from './ShowingFilm.scss';
 import WrapImage from '../../../../components/Image/Image';
 import {HomeContext} from '../../../../context';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function ShowingFilm() {
   const {nowShowingFilm, selectedId} = useContext(HomeContext);
@@ -18,10 +18,11 @@ export default function ShowingFilm() {
         <TouchableOpacity
           id={item.id}
           className={styles.home_nowShowing_film}
-          onPress={() => navigation.navigate("FilmScreen",{
-            filmId : item.Id
-          })}
-          >
+          onPress={() =>
+            navigation.navigate('FilmScreen', {
+              filmId: item.Id,
+            })
+          }>
           <View className={styles.home_nowShowing_film_card}>
             <WrapImage width={200} height={300} source={item.ImageUrls} />
           </View>
