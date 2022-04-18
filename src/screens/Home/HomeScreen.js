@@ -1,25 +1,22 @@
 import {View, Text, Button, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './HomeScreen.scss';
-import globalStyles from '../../global.scss'
+import globalStyles from '../../global.scss';
 import Category from './components/Category/Category';
-import {getFilmByCategory} from '../../services/CallAPI';
 import ShowingFilm from './components/ShowingFilm/ShowingFilm';
 import {HomeContext} from '../../context';
 import ComingFilm from './components/ComingFilm/ComingFilm';
+import { getByCate } from '../../services/film';
 
 export default function HomeScreen() {
   const [category, setCategory] = useState('Action');
   const [selectedId, setSelectedId] = useState(0);
   const [nowShowingFilm, setNowShowingFilm] = useState([]);
+
   const fetchAPI = async cate => {
-    try {
-      // console.log(cate)
-      const res = await getFilmByCategory(cate);
+      const res = await getByCate(cate)
       setNowShowingFilm(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
+    
   };
   const handleCategory = cate => {
     setCategory(cate);
@@ -38,7 +35,7 @@ export default function HomeScreen() {
           <Text className={styles.home_header_item}>My Ticket</Text>
         </View>
         <Text className={styles.header}>Coming soon</Text>
-        <ComingFilm/>
+        <ComingFilm />
         <Category />
         <Text className={styles.header}>Now Showing</Text>
         <ShowingFilm />

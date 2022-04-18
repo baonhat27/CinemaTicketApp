@@ -5,9 +5,7 @@ import {HomeContext} from '../../../../context';
 
 export default function CategoryItem({
   categoryItem,
-  checkClick,
   index,
-  handleCheckClick,
 }) {
   const {handleCategory, setSelectedId, selectedId} = useContext(HomeContext);
   return (
