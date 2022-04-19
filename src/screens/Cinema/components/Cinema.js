@@ -1,22 +1,29 @@
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from './Cinema.scss';
 import WrapImage from '../../../components/Image/Image';
+import {useNavigation} from '@react-navigation/native';
 
-export default function Cinema() {
+export default function Cinema({item, filmId}) {
+  const navigation = useNavigation();
   return (
-    <View className={styles.cinema}>
+    <TouchableOpacity
+      className={styles.cinema}
+      onPress={() =>
+        navigation.navigate('BookingScreen', {cinema: item, filmId: filmId})
+      }>
       <View className={styles.cinema_img}>
         <WrapImage
-          width={100}
-          height={100}
-          src="https://media.thuonghieucongluan.vn/uploads/2018_01_11/26734039-1683846598338331-2158010752302853305-n-1515652085.jpg"
+          width={120}
+          height={120}
+          source={item.ImageUrls}
+          styles={{borderBottomLeftRadius: 10, borderTopLeftRadius: 10}}
         />
       </View>
       <View className={styles.cinema_info}>
-        <Text className={styles.cinema_name}></Text>
-        <Text className={styles.cinema_address}></Text>
+        <Text className={styles.cinema_name}>{item.Name}</Text>
+        <Text className={styles.cinema_address}>{item.Address}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

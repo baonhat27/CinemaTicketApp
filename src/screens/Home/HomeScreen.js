@@ -30,14 +30,14 @@ export default function HomeScreen() {
       value={{handleCategory, nowShowingFilm, setSelectedId, selectedId}}>
       <View className={globalStyles.screen}>
         <View className={styles.home_header}>
-          <Text className={styles.home_header_item}>All Movies</Text>
-          <Text className={styles.home_header_item}>For Kids</Text>
-          <Text className={styles.home_header_item}>My Ticket</Text>
+          <Text className={styles.home_header_item}>Tất cả phim</Text>
+          <Text className={styles.home_header_item}>Dành cho trẻ em</Text>
+          <Text className={styles.home_header_item}>Vé của tôi</Text>
         </View>
-        <Text className={styles.header}>Coming soon</Text>
+        <Text className={styles.header}>Sắp công chiếu</Text>
         <ComingFilm />
         <Category />
-        <Text className={styles.header}>Now Showing</Text>
+        <Text className={styles.header}>Đang chiếu</Text>
         <ShowingFilm />
       </View>
     </HomeContext.Provider>

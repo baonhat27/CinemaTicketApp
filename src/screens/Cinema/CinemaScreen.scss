@@ -1,9 +1,17 @@
 .cinema_screen{
      width: 100%;
-     height: 100%;
+     height: 80%;
      display: flex;
      justify-content: center;
      align-items: center;
+}
+.cinema_header{
+     text-align: center;
+     width: 100%;
+     height: 10%;
+     padding-top: 20px;
+     color: #fff;
+     font-size: 20px;
 }
 .cinema_list{
      width: 100%;

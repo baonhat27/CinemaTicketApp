@@ -44,7 +44,7 @@ export default function FilmScreen({route}) {
             <CustomButton
               width={170}
               height={57}
-              content="Get Ticket"
+              content="Đặt vé"
               onPress={() =>
                 navigation.navigate('CinemaScreen', {filmId: filmId})
               }
