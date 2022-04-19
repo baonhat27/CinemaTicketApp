@@ -1,25 +1,36 @@
-.booking_screen{
-     height: 100%;
-     width: 100%;
+.booking_screen {
+  height: 100%;
+  width: 100%;
 }
-.booking_screen_header{
-     width: 100%;
-     padding-top: 50px;
+.booking_screen_header {
+  width: 100%;
+  padding-top: 10px;
 }
-.cinema_name{
-     text-align: center;
-     width: 100%;
-     font-size: 25px;
-     color: #fff;
+.cinema_name {
+  text-align: center;
+  width: 100%;
+  font-size: 25px;
+  color: #fff;
 }
-.cinema_address{
-     text-align: right;
-     width: 100%;
-     font-size: 16px;
-     color: #fff;
+.cinema_address {
+  text-align: right;
+  width: 100%;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
 }
-.schedules{
-     width: 100%;
-     padding-top: 20px;
-     padding-left: 25px;
+.cinema_img {
+  width: 100%;
+}
+.schedules {
+  width: 100%;
+  height: 200px;
+  padding-top: 20px;
+  padding-left: 25px;
+}
+.booking_seats {
+  width: 100%;
+  height: 500px;
+  padding-left: 25px;
+  background-color: red;
 }
