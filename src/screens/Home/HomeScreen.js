@@ -1,24 +1,28 @@
 import {View, Text, Button, Image} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from './HomeScreen.scss';
 import globalStyles from '../../global.scss';
 import Category from './components/Category/Category';
 import ShowingFilm from './components/ShowingFilm/ShowingFilm';
 import {HomeContext} from '../../context';
 import ComingFilm from './components/ComingFilm/ComingFilm';
-import { getByCate } from '../../services/film';
+import {getByCate} from '../../services/film';
 
 export default function HomeScreen() {
   const [category, setCategory] = useState('Action');
   const [selectedId, setSelectedId] = useState(0);
   const [nowShowingFilm, setNowShowingFilm] = useState([]);
+  const flatListRef = useRef();
+  const onPressFunction = () => {
+    flatListRef.current.scrollToIndex({index: 0});
+  };
 
   const fetchAPI = async cate => {
-      const res = await getByCate(cate)
-      setNowShowingFilm(res.data.data);
-    
+    const res = await getByCate(cate);
+    setNowShowingFilm(res.data.data);
+    onPressFunction();
   };
-  const handleCategory = cate => {
+  const handleCategory = (cate) => {
     setCategory(cate);
   };
   useEffect(() => {
@@ -27,17 +31,23 @@ export default function HomeScreen() {
 
   return (
     <HomeContext.Provider
-      value={{handleCategory, nowShowingFilm, setSelectedId, selectedId}}>
+      value={{
+        handleCategory,
+        nowShowingFilm,
+        setSelectedId,
+        selectedId,
+        onPressFunction,
+        flatListRef,
+      }}>
       <View className={globalStyles.screen}>
         <View className={styles.home_header}>
-          <Text className={styles.home_header_item}>All Movies</Text>
-          <Text className={styles.home_header_item}>For Kids</Text>
-          <Text className={styles.home_header_item}>My Ticket</Text>
+          <Text className={styles.home_header_item}>Tất cả phim</Text>
+          <Text className={styles.home_header_item}>Dành cho trẻ em</Text>
+          <Text className={styles.home_header_item}>Vé của tôi</Text>
         </View>
-        <Text className={styles.header}>Coming soon</Text>
         <ComingFilm />
         <Category />
-        <Text className={styles.header}>Now Showing</Text>
+        
         <ShowingFilm />
       </View>
     </HomeContext.Provider>

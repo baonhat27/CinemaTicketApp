@@ -8,6 +8,7 @@ import {CustomButton} from '../../components';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import {useNavigation} from '@react-navigation/native';
 import { getById } from '../../services/film';
+import  Icon  from 'react-native-vector-icons/Ionicons';
 
 var width = Dimensions.get('window').width; //full width
 
@@ -44,16 +45,21 @@ export default function FilmScreen({route}) {
             <CustomButton
               width={170}
               height={57}
-              content="Get Ticket"
+              content="Đặt vé"
               onPress={() =>
                 navigation.navigate('CinemaScreen', {filmId: filmId})
               }
+              icon='ticket-confirmation-outline'
             />
           </View>
           <View className={styles.film_describe}>
             <Text className={styles.film_describe_item}>{film.Category}</Text>
             <Text className={styles.film_describe_item}>
-              {film.Length} phút
+              <Icon
+                name='time'
+                size={18}
+              />
+                {film.Length} phút
             </Text>
           </View>
           <View className={styles.film_preview}>
