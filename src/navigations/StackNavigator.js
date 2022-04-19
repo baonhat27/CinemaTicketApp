@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator();
 export const StackNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="LoginScreen"
       screenOptions={{
         headerShown: true,
         headerTransparent: true,
