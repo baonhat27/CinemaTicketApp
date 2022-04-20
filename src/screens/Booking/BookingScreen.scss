@@ -7,15 +7,17 @@
   padding-top: 10px;
 }
 .cinema_name {
+  padding: 0 30px;
   text-align: center;
   width: 100%;
   font-size: 25px;
   color: #fff;
 }
 .cinema_address {
+  padding-right: 10px;
   text-align: right;
   width: 100%;
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   margin-bottom: 10px;
 }
@@ -33,4 +35,14 @@
   height: 500px;
   padding-left: 25px;
   background-color: red;
+}
+.date_choose{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.date{
+  font-size: 16px;
+  color: #fff;
 }

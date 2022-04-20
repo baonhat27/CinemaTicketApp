@@ -7,6 +7,7 @@ export default function CategoryItem({
   categoryItem,
   index,
 }) {
+  
   const {handleCategory, setSelectedId, selectedId, onPressFunction} = useContext(HomeContext);
   return (
     <Text

@@ -1,4 +1,4 @@
-import {View, Text, Button, Image} from 'react-native';
+import {View, Text, Button, Image, ScrollView} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import styles from './HomeScreen.scss';
 import globalStyles from '../../global.scss';
@@ -22,7 +22,7 @@ export default function HomeScreen() {
     setNowShowingFilm(res.data.data);
     onPressFunction();
   };
-  const handleCategory = (cate) => {
+  const handleCategory = cate => {
     setCategory(cate);
   };
   useEffect(() => {
@@ -39,17 +39,16 @@ export default function HomeScreen() {
         onPressFunction,
         flatListRef,
       }}>
-      <View className={globalStyles.screen}>
-        <View className={styles.home_header}>
+      <ScrollView className={styles.screen}>
+        <ScrollView contentContainerStyle={styles.home_header}>
           <Text className={styles.home_header_item}>Tất cả phim</Text>
           <Text className={styles.home_header_item}>Dành cho trẻ em</Text>
           <Text className={styles.home_header_item}>Vé của tôi</Text>
-        </View>
+        </ScrollView>
         <ComingFilm />
         <Category />
-        
         <ShowingFilm />
-      </View>
+      </ScrollView>
     </HomeContext.Provider>
   );
 }

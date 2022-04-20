@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './Category.scss';
 import CategoryItem from './CategoryItem';
@@ -8,16 +15,14 @@ const categoryList = ['Action', 'Comedy', 'Romance', 'Thriller', 'Fantasy'];
 
 export default function Category() {
   return (
-    <View className={styles.home_category}>
-      {categoryList.map((categoryItem, index) => {
-        return (
-          <CategoryItem
-            key={categoryItem}
+    <ScrollView contentContainerStyle={styles.home_category} horizontal={true}>
+      {categoryList.map((item,index) => {
+        return <CategoryItem
+            categoryItem={item}
             index={index}
-            categoryItem={categoryItem}
-          />
-        );
+            key={index}
+        />;
       })}
-    </View>
+    </ScrollView>
   );
 }
