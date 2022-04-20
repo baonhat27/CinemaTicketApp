@@ -1,16 +1,19 @@
+.screen{
+  width: 100%;
+  background-color: #263238;
 
+}
 .home_header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
-  padding: 40px 0 0 0px;
+  padding: 20px 0 0 0px;
   margin-bottom: 0;
-  width: 100%;
 }
 .home_header_item {
   font-size: 15px;
   color: #ffffff;
-  margin: 0px 30px;
+  margin: 0px 15px;
 }
 .header {
   color: #ffffff;
