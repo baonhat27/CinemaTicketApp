@@ -1,14 +1,14 @@
-.login {
+.ConfirmLogin {
   flex: 1;
   background-color: #000;
   justify-content: center;
 }
 
-.loginLogo {
+.ConfirmLoginLogo {
   align-items: center;
 }
 
-.loginText1 {
+.ConfirmLoginText1 {
   font-family: 'Product Sans';
   font-size: 22px;
   font-weight: bold;
@@ -18,7 +18,7 @@
   margin-top: 46px;
 }
 
-.loginText2 {
+.ConfirmLoginText2 {
   font-family: 'Product Sans';
   text-align: center;
   font-size: 15px;
@@ -27,7 +27,7 @@
   margin-top: 8px;
 }
 
-.loginInput {
+.ConfirmLoginInput {
   font-family: 'Product Sans';
   background-color: #000;
   text-align: center;
@@ -40,7 +40,7 @@
   border-radius: 25px;
 }
 
-.loginFooter {
+.ConfirmLoginFooter {
   font-family: 'Product Sans';
   text-align: center;
   font-size: 14px;
@@ -48,11 +48,7 @@
   margin-top: 85px;
 }
 
-.loginFooterLink {
-  color: greenyellow;
-}
-
-.loginFooterNext {
+.ConfirmLoginFooterNext {
   font-family: 'Product Sans';
   text-align: center;
   font-weight: bold;
