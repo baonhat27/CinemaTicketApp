@@ -7,7 +7,7 @@ export default function CategoryItem({
   categoryItem,
   index,
 }) {
-  const {handleCategory, setSelectedId, selectedId} = useContext(HomeContext);
+  const {handleCategory, setSelectedId, selectedId, onPressFunction} = useContext(HomeContext);
   return (
     <Text
       className={
@@ -18,6 +18,7 @@ export default function CategoryItem({
       onPress={() => {
         handleCategory(categoryItem);
         setSelectedId(index);
+        // onPressFunction();
       }}>
       {categoryItem}
     </Text>

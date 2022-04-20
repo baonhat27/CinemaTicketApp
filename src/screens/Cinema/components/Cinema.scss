@@ -1,5 +1,24 @@
-.cinema{
-     width: 300px;
-     height: 100px;
-     border: 1px solid red;
+.cinema {
+  width: 360px;
+  height: 120px;
+  display: flex;
+  flex-direction: row;
+}
+.cinema_info {
+  flex: 1;
+  flex-shrink: 1;
+  flex-direction: column;
+  background-color: #767678;
+  padding: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.cinema_name {
+  flex-shrink: 1;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+}
+.cinema_address {
+  color: #fff;
 }

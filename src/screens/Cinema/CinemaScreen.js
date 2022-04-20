@@ -11,13 +11,15 @@ export default function CinemaScreen({route}) {
   const fetchAPI = async id => {
     const res = await getByFilmId(id);
     setCinema(res.data.data);
-    console.log(res.data.data);
+    // console.log(res.data.data);
   };
   useEffect(() => {
     fetchAPI(filmId);
   }, []);
   return (
     <View className={globalStyles.screen}>
+      <Text className={styles.cinema_header}>Chọn rạp chiếu phim</Text>
+
       <View className={styles.cinema_screen}>
         <View className={styles.cinema_list}>
           <FlatList
@@ -26,7 +28,7 @@ export default function CinemaScreen({route}) {
             horizontal={false}
             renderItem={({item}) => (
               <View className={styles.cinema_list_item}>
-                <Cinema />
+                <Cinema item={item} filmId={filmId} />
               </View>
             )}
           />
