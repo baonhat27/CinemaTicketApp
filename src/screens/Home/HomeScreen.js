@@ -1,11 +1,12 @@
-import { View, Text, ScrollView } from 'react-native';
-import React, { useEffect, useRef, useState } from 'react';
+import {View, Text, ScrollView} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import globalStyles from './../../global.scss';
 import styles from './HomeScreen.scss';
 import Category from './components/Category/Category';
 import ShowingFilm from './components/ShowingFilm/ShowingFilm';
-import { HomeContext } from '../../context';
+import {HomeContext} from '../../context';
 import ComingFilm from './components/ComingFilm/ComingFilm';
-import { getByCate } from '../../services/film';
+import {getByCate} from '../../services/film';
 import WrapImage from '../../components/Image/Image';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -18,7 +19,7 @@ export default function HomeScreen() {
   // const token_login = AsyncStorage.getItem('token_login');
 
   const onPressFunction = () => {
-    flatListRef.current.scrollToIndex({ index: 0 });
+    flatListRef.current.scrollToIndex({index: 0});
   };
 
   const fetchAPI = async cate => {
@@ -43,8 +44,9 @@ export default function HomeScreen() {
         onPressFunction,
         flatListRef,
       }}>
-      <ScrollView className={styles.screen}>
-        {/* {token_login ? (
+      <ScrollView contentContainerStyle={globalStyles.screen}>
+        <View className={styles.screen}>
+          {/* {token_login ? (
           <View className={styles.home_avatar}>
             <WrapImage
             width={60}
@@ -58,9 +60,10 @@ export default function HomeScreen() {
         ) : (
           <Text className={styles.home_header}>Đăng nhập</Text>
         )} */}
-        <ComingFilm />
-        <Category />
-        <ShowingFilm />
+          <ComingFilm />
+          <Category />
+          <ShowingFilm />
+        </View>
       </ScrollView>
     </HomeContext.Provider>
   );

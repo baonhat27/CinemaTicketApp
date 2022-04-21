@@ -7,8 +7,11 @@ import WrapImage from '../../components/Image/Image';
 import {getById} from '../../services/schedule';
 import Schedule from './components/Schedule/Schedule';
 import MyDatePicker from './components/MyDatePicker/MyDatePicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function BookingScreen({route}) {
+  const login_token = AsyncStorage.getItem("login_token")
   const cinema = route.params.cinema;
   const filmId = route.params.filmId;
   const [date, setDate] = useState(new Date());
