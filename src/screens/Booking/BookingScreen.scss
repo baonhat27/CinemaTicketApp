@@ -29,15 +29,14 @@
   height: 200px;
   padding-top: 20px;
   padding-left: 25px;
+  padding-right: 7px;
 }
-.booking_seats {
+.booking_seats_box {
   width: 100%;
-  height: 500px;
   padding-left: 25px;
   background-color: red;
 }
 .date_choose{
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -45,4 +44,7 @@
 .date{
   font-size: 16px;
   color: #fff;
+}
+.schedule_list{
+  display: flex;
 }

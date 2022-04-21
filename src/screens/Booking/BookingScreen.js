@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Touchable,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, ScrollView, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import globalStyles from '../../global.scss';
 import styles from './BookingScreen.scss';
@@ -12,23 +6,27 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import WrapImage from '../../components/Image/Image';
 import {getById} from '../../services/schedule';
 import Schedule from './components/Schedule/Schedule';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import DatePicker from './components/DatePicker/DatePicker';
+import MyDatePicker from './components/MyDatePicker/MyDatePicker';
 
 export default function BookingScreen({route}) {
   const cinema = route.params.cinema;
   const filmId = route.params.filmId;
-  const [date, setDate] = useState('20/04/2022');
-  const [schedule, setSchedule] = useState([]);
-  // console.log("Booking" ,filmId)
+  const [date, setDate] = useState(new Date());
+  const [scheduleList, setScheduleList] = useState([]);
+  const [selectedSchedule, setSelectedSchedule] = useState();
+  const [listSeat, setListSeat] = useState([]);
+  const handleClickSchedule = scheduleId => {
+    setSelectedSchedule(scheduleId);
+  };
+
+  // *****Call API to get schedule*****
   const fetchAPI = async (filmId, cinemaId) => {
     const res = await getById(filmId, cinemaId);
-    // console.log(res.data.data)
-    setSchedule(res.data.data);
+    setScheduleList(res.data.data);
   };
   useEffect(() => {
     fetchAPI(filmId, cinema.Id);
-  }, []);
+  }, [date]);
   return (
     <View className={globalStyles.screen}>
       <ScrollView className={styles.booking_screen}>
@@ -53,13 +51,31 @@ export default function BookingScreen({route}) {
             Lịch chiếu phim
           </Text>
           <View className={styles.date_choose}>
-            <Text className={styles.date}>{date}</Text>
-            <DatePicker />
+            <Text className={styles.date}>
+              {date.getDate()} tháng {date.getMonth() + 1} năm{' '}
+              {date.getFullYear()}
+            </Text>
+            <MyDatePicker date={date} setDate={setDate} />
           </View>
-          <Schedule />
+
+          <ScrollView
+            contentContainerStyle={styles.schedule_list}
+            horizontal={true}>
+            {scheduleList.map(item => {
+              return (
+                <Schedule
+                  key={item.Id}
+                  scheduleId={item.Id}
+                  handleClickSchedule={handleClickSchedule}
+                />
+              );
+            })}
+          </ScrollView>
         </View>
-        <View className={styles.booking_seats}>
+
+        <View className={styles.booking_seats_box}>
           <Text style={{color: '#fff', fontSize: 20}}>Đặt chỗ</Text>
+          <View className={styles.booking_seats}></View>
         </View>
       </ScrollView>
     </View>
