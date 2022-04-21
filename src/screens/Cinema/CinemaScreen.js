@@ -23,6 +23,7 @@ export default function CinemaScreen({route}) {
       <View className={styles.cinema_screen}>
         <View className={styles.cinema_list}>
           <FlatList
+            style={{width: '100%'}}
             data={cinema}
             keyExtractor={(item, index) => index}
             horizontal={false}
