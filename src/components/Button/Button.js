@@ -17,7 +17,7 @@ export default function CustomButton({width, height, content, onPress, icon}) {
       }}
       onPress={onPress}>
       <Icon name={icon} size={23} style={{color:'#fff', marginRight:5}}/>
-      <Text style={{color: '#ffffff', fontSize: 18, fontWeight: '600'}}>
+      <Text style={{color: '#ffffff', fontSize: 18, fontWeight: 'bold'}}>
         {content}
       </Text>
     </TouchableOpacity>

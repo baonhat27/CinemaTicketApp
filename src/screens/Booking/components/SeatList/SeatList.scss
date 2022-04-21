@@ -1,0 +1,126 @@
+$heightBox: 27px;
+$widthBox: 27px;
+
+.seatListHeader {
+  margin: 10px 0;
+}
+
+.seatListHeaderTitle {
+  font-size: 14px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.seatListContainer {
+  margin-top: 20px;
+  margin-right: 10px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.seatListLeft {
+  width: 148px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.seatListRight {
+  width: 148px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.seatListItem {
+  height: $heightBox;
+  width: $widthBox;
+  border: 1px solid #787878;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.seatListItemNone {
+  height: $heightBox;
+  width: $widthBox;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.seatListItemSelected {
+  background-color: #d98639;
+  height: $heightBox;
+  width: $widthBox;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.seatListItemReserved {
+  background-color: #c4c4c4;
+  height: $heightBox;
+  width: $widthBox;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.seatListNote {
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 25px 38px 20px;
+}
+
+.seatListNoteBox {
+  flex-direction: row;
+  align-items: center;
+}
+
+.seatListNoteText {
+  font-size: 14px;
+  color: #fff;
+  margin-left: 5px;
+}
+
+.seatListNoteAvailable {
+  height: 17px;
+  width: 17px;
+  border: 1px solid #787878;
+  border-radius: 5px;
+}
+
+.seatListNoteReserved {
+  background-color: #c4c4c4;
+  height: 17px;
+  width: 17px;
+  border-radius: 5px;
+}
+
+.seatListNoteSelected {
+  background-color: #d98639;
+  height: 17px;
+  width: 17px;
+  border-radius: 5px;
+}
+
+.seatListFooter {
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 20px 25px 10px;
+}
+
+.seatListFooterTickets {
+  color: #fff;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.seatListFooterPrice {
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+}
