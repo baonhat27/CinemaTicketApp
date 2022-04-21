@@ -3,26 +3,18 @@
   background-color: #263238;
 
 }
+.home_avatar {
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+}
 .home_header {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  padding: 20px 0 0 0px;
-  margin-bottom: 0;
-}
-.home_header_item {
-  font-size: 15px;
-  color: #ffffff;
-  margin: 0px 15px;
-}
-.header {
-  color: #ffffff;
-  font-size: 25px;
-  margin: 10px 0 10px 0;
-  padding: 0 0 0 30px;
-}
-
-.isPress{
-  background-color: red;
+  font-family: 'Product Sans';
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-align: right;
+  letter-spacing: 1px;
+  padding: 12px 20px 0 0;
 }
 

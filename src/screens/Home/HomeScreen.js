@@ -1,20 +1,24 @@
-import {View, Text, Button, Image, ScrollView} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './HomeScreen.scss';
-import globalStyles from '../../global.scss';
 import Category from './components/Category/Category';
 import ShowingFilm from './components/ShowingFilm/ShowingFilm';
-import {HomeContext} from '../../context';
+import { HomeContext } from '../../context';
 import ComingFilm from './components/ComingFilm/ComingFilm';
-import {getByCate} from '../../services/film';
+import { getByCate } from '../../services/film';
+import WrapImage from '../../components/Image/Image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function HomeScreen() {
   const [category, setCategory] = useState('Action');
   const [selectedId, setSelectedId] = useState(0);
   const [nowShowingFilm, setNowShowingFilm] = useState([]);
-  const flatListRef = useRef();
+  const flatListRef = useRef([]);
+
+  // const token_login = AsyncStorage.getItem('token_login');
+
   const onPressFunction = () => {
-    flatListRef.current.scrollToIndex({index: 0});
+    flatListRef.current.scrollToIndex({ index: 0 });
   };
 
   const fetchAPI = async cate => {
@@ -40,11 +44,20 @@ export default function HomeScreen() {
         flatListRef,
       }}>
       <ScrollView className={styles.screen}>
-        <ScrollView contentContainerStyle={styles.home_header}>
-          <Text className={styles.home_header_item}>Tất cả phim</Text>
-          <Text className={styles.home_header_item}>Dành cho trẻ em</Text>
-          <Text className={styles.home_header_item}>Vé của tôi</Text>
-        </ScrollView>
+        {/* {token_login ? (
+          <View className={styles.home_avatar}>
+            <WrapImage
+            width={60}
+            height={60}
+            source={
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjcV9dzXaOjNsfMc-GPxEdjWcAOFtV8x_gLn2KqpXN6pGgOa796SZCdyOjoysRYCPw1-s&usqp=CAU'
+            }
+            styles={{ borderRadius: 100, position: 'absolute', right: 0}}
+          />
+          </View>
+        ) : (
+          <Text className={styles.home_header}>Đăng nhập</Text>
+        )} */}
         <ComingFilm />
         <Category />
         <ShowingFilm />

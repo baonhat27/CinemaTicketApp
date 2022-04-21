@@ -6,16 +6,18 @@ import {
   TextInput,
   Keyboard,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styles from './LoginScreen.scss';
 import WrapImage from '../../components/Image/Image';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-export default function LoginScreen() {
+export default function LoginScreen({route}) {
   const [nextFooter, setNextFooter] = useState(false);
   const [changeInput, setChangeInput] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [username, setUsername] = useState('');
   const navigation = useNavigation();
+  const filmId = route.params.filmId;
 
   return (
     <KeyboardAvoidingView style={styles.login}>
@@ -36,14 +38,21 @@ export default function LoginScreen() {
           </View>
           <TextInput
             style={styles.loginInput}
+            placeholder="Nhập tên người dùng"
+            placeholderTextColor="#fff"
+            maxLength={30}
+            onPressIn={() => {
+              setNextFooter(true);
+            }}
+            onPressOut={(value) => {setUsername(value)}}
+          />
+          <TextInput
+            style={styles.loginInput}
             placeholder="Nhập số điện thoại"
             placeholderTextColor="#fff"
             maxLength={10}
             onPressIn={() => {
               setNextFooter(true);
-            }}
-            onBlur={() => {
-              setNextFooter(false);
             }}
             onChangeText={value => {
               if (value.length === 10) {
@@ -63,8 +72,14 @@ export default function LoginScreen() {
           ) : (
             <Text
               style={styles.loginFooterNext}
-              onPress={() => navigation.navigate('ConfirmLoginScreen', { phoneNumber: phoneNumber })}>
-              {changeInput ? 'Tiếp theo' : 'Vui lòng nhập đầy đủ số điện thoại'}
+              onPress={() =>
+                navigation.navigate('ConfirmLoginScreen', {
+                  phoneNumber: phoneNumber,
+                  filmId: filmId,
+                  username: username,
+                })
+              }>
+              {changeInput ? 'Tiếp theo' : 'Vui lòng nhập đầy đủ thông tin'}
             </Text>
           )}
         </View>
