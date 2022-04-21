@@ -10,28 +10,33 @@ import React, {useState} from 'react';
 import styles from './ConfirmLoginScreen.scss';
 import WrapImage from '../../components/Image/Image';
 import {login} from '../../services/account';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ConfirmLoginScreen({route}) {
   const [changeInput, setChangeInput] = useState(false);
   const [OTP, setOTP] = useState('');
   const navigation = useNavigation();
   const phoneNumber = route.params.phoneNumber;
+  const filmId = route.params.filmId;
+  const username = route.params.username;
 
   const handleSubmit = async () => {
     const dataUser = {
       otp: OTP,
-      phone: phoneNumber
+      phone: phoneNumber,
     };
     const {data, success} = await login(dataUser);
     console.log(data.data, success);
     if (success && data.data.token) {
-      // navigation.navigate('ConfirmLoginScreen');
-      console.log("login success!");
+      navigation.navigate('CinemaScreen', {filmId: filmId});
+      await AsyncStorage.setItem('token_login', data.data.token);
+      await AsyncStorage.setItem('username', username);
+      console.log('login success!');
     } else {
-      console.log("login fail!");
+      console.log('login fail!');
     }
-  }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.ConfirmLogin}>
@@ -39,10 +44,10 @@ export default function ConfirmLoginScreen({route}) {
         <View style={styles.ConfirmLoginContainer}>
           <View style={styles.ConfirmLoginLogo}>
             <WrapImage
-              width={60}
-              height={54}
+              width={51}
+              height={60}
               source={
-                'https://firebasestorage.googleapis.com/v0/b/fir-react-upload-fb2fe.appspot.com/o/images%2FMessage.png?alt=media&token=c2459b35-7d8f-42f0-a956-256e4b56cdea'
+                'https://firebasestorage.googleapis.com/v0/b/fir-react-upload-fb2fe.appspot.com/o/images%2FLock.png?alt=media&token=47b95116-e0d9-4b15-add7-276bb4690915'
               }
             />
           </View>

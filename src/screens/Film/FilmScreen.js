@@ -9,6 +9,7 @@ import ReadMore from '@fawazahmed/react-native-read-more';
 import {useNavigation} from '@react-navigation/native';
 import {getById} from '../../services/film';
 import Icon from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var width = Dimensions.get('window').width; //full width
 
@@ -54,9 +55,15 @@ export default function FilmScreen({route}) {
                 width={120}
                 height={50}
                 content="Đặt vé"
-                onPress={() =>
-                  navigation.navigate('CinemaScreen', {filmId: filmId})
-                }
+                onPress={async () => {
+                  const tokenLogin = await AsyncStorage.getItem('token_login');
+                  console.log('Token login', tokenLogin);
+                  if (tokenLogin) {
+                    navigation.navigate('CinemaScreen', {filmId: filmId});
+                  } else {
+                    navigation.navigate('LoginScreen', {filmId: filmId});
+                  }
+                }}
                 icon="ticket-confirmation-outline"
               />
             </View>
