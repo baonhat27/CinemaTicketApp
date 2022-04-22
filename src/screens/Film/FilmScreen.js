@@ -59,7 +59,7 @@ export default function FilmScreen({route}) {
                   const tokenLogin = await AsyncStorage.getItem('token_login');
                   console.log('Token login', tokenLogin);
                   if (tokenLogin) {
-                    navigation.navigate('CinemaScreen', {filmId: filmId});
+                    navigation.navigate('CinemaScreen', {filmId: filmId,filmName: film.Name});
                   } else {
                     navigation.navigate('LoginScreen', {filmId: filmId});
                   }

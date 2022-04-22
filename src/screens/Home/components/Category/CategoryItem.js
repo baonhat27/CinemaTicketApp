@@ -2,6 +2,7 @@ import {View, Text} from 'react-native';
 import React, {useContext, useState} from 'react';
 import styles from './Category.scss';
 import {HomeContext} from '../../../../context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function CategoryItem({
   categoryItem,
@@ -19,6 +20,7 @@ export default function CategoryItem({
       onPress={() => {
         handleCategory(categoryItem);
         setSelectedId(index);
+        // AsyncStorage.removeItem('token_login')
         // onPressFunction();
       }}>
       {categoryItem}

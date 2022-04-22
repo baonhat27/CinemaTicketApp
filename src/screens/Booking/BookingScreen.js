@@ -7,12 +7,17 @@ import WrapImage from '../../components/Image/Image';
 import {getById} from '../../services/schedule';
 import Schedule from './components/Schedule/Schedule';
 import MyDatePicker from './components/MyDatePicker/MyDatePicker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import SeatList from './components/SeatList/SeatList';
 
 export default function BookingScreen({route}) {
+  const login_token = AsyncStorage.getItem('login_token');
   const cinema = route.params.cinema;
   const filmId = route.params.filmId;
+  const filmName = route.params.filmName;
   const [date, setDate] = useState(new Date());
+  const [selectedSeats, setSelectedSeats] = useState([]);
   const [scheduleList, setScheduleList] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState();
   const handleClickSchedule = scheduleId => {
@@ -74,9 +79,15 @@ export default function BookingScreen({route}) {
         </View>
 
         <View className={styles.booking_seats_box}>
-          <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>Đặt chỗ</Text>
+          <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>
+            Đặt chỗ
+          </Text>
           <View className={styles.booking_seats}>
-            <SeatList />
+            <SeatList
+              selectedSeats={selectedSeats}
+              setSelectedSeats={setSelectedSeats}
+              filmName={filmName}
+            />
           </View>
         </View>
       </ScrollView>
