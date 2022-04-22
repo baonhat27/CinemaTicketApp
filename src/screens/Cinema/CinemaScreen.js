@@ -8,6 +8,7 @@ import Cinema from './components/Cinema';
 export default function CinemaScreen({route}) {
   const [cinema, setCinema] = useState([]);
   const filmId = route.params.filmId;
+  const filmName = route.params.filmName;
   const fetchAPI = async id => {
     const res = await getByFilmId(id);
     setCinema(res.data.data);
@@ -29,7 +30,7 @@ export default function CinemaScreen({route}) {
             horizontal={false}
             renderItem={({item}) => (
               <View className={styles.cinema_list_item}>
-                <Cinema item={item} filmId={filmId} />
+                <Cinema item={item} filmId={filmId} filmName={filmName} />
               </View>
             )}
           />

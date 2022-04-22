@@ -4,13 +4,17 @@ import styles from './Cinema.scss';
 import WrapImage from '../../../components/Image/Image';
 import {useNavigation} from '@react-navigation/native';
 
-export default function Cinema({item, filmId}) {
+export default function Cinema({item, filmId, filmName}) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
       className={styles.cinema}
       onPress={() =>
-        navigation.navigate('BookingScreen', {cinema: item, filmId: filmId})
+        navigation.navigate('BookingScreen', {
+          cinema: item,
+          filmId: filmId,
+          filmName: filmName,
+        })
       }>
       <View className={styles.cinema_img}>
         <WrapImage
