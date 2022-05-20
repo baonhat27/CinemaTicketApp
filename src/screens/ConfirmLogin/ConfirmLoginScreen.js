@@ -29,7 +29,7 @@ export default function ConfirmLoginScreen({route}) {
     const {data, success} = await login(dataUser);
     console.log(data.data, success);
     if (success && data.data.token) {
-      navigation.navigate('CinemaScreen', {filmId: filmId});
+      navigation.popToTop()
       await AsyncStorage.setItem('token_login', data.data.token);
       await AsyncStorage.setItem('username', username);
       console.log('login success!');

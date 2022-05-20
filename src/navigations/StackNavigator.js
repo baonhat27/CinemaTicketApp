@@ -12,12 +12,13 @@ import {
   FilmScreen,
   CinemaScreen,
   BookingScreen,
+  PaymentScreen
 } from '../screens';
 
 export const StackNavigator = () => {
   const navigation = useNavigation();
   const Stack = createNativeStackNavigator();
-  const token_login = AsyncStorage.getItem('token_login');
+  const token_login = AsyncStorage.getItem('username');
   // console.log("Type Of token" ,typeof(token_login));
   return (
     <Stack.Navigator
@@ -26,21 +27,6 @@ export const StackNavigator = () => {
         headerShown: true,
         headerTintColor: '#d98639',
         headerTitle: '',
-        headerRight: () =>
-          typeof token_login === String ? (
-            <Avatar />
-          ) : (
-            <Text
-              style={{
-                color: '#d98639',
-                fontSize: 18,
-                fontWeight: '500',
-                letterSpacing: 1,
-              }}
-              onPress={() => navigation.navigate('LoginScreen')}>
-              Đăng nhập
-            </Text>
-          ),
       }}>
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="ConfirmLoginScreen" component={ConfirmLoginScreen} />
@@ -52,23 +38,6 @@ export const StackNavigator = () => {
           headerTransparent: true,
           headerTitle: () => <Logo />,
           headerTitleAlign: 'center',
-          headerRight: () =>
-            typeof token_login !== Object ? (
-              <Avatar />
-            ) : (
-              <Text
-                style={{
-                  color: '#fff',
-                  fontSize: 18,
-                  fontWeight: '500',
-                  letterSpacing: 1,
-                }}
-                onPress={() =>
-                  navigation.navigate('LoginScreen', {filmId: 9999})
-                }>
-                Đăng nhập
-              </Text>
-            ),
         }}
       />
       <Stack.Screen
@@ -78,8 +47,11 @@ export const StackNavigator = () => {
           headerTitle: 'Phim',
         }}
       />
-      <Stack.Screen name="CinemaScreen" component={CinemaScreen} />
+      <Stack.Screen name="CinemaScreen" component={CinemaScreen} options={{
+          headerTitle: 'Chọn rạp',
+        }}/>
       <Stack.Screen name="BookingScreen" component={BookingScreen} />
+      <Stack.Screen name="PaymentScreen" component={PaymentScreen} />
     </Stack.Navigator>
   );
 };

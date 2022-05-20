@@ -2,8 +2,18 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import styles from './SeatList.scss';
 import {CustomButton} from '../../../../components';
+import {useNavigation} from '@react-navigation/native';
+import {holdTicket} from '../../../../services/ticket';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function SeatList({selectedSeats, setSelectedSeats, filmName}) {
+export default function SeatList({
+  selectedSeats,
+  setSelectedSeats,
+  filmName,
+  selectedSchedule,
+  holdingSeats,
+}) {
+  const navigation = useNavigation();
   const arraySeats = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
@@ -29,7 +39,7 @@ export default function SeatList({selectedSeats, setSelectedSeats, filmName}) {
             if (index + 1 === 1 || index + 1 === 33) {
               return <View style={styles.seatListItemNone} key={index} />;
             }
-            if (index + 1 === 12 || index + 1 === 23) {
+            if (holdingSeats.includes(index + 1)) {
               return <View style={styles.seatListItemReserved} key={index} />;
             }
             return (
@@ -108,10 +118,15 @@ export default function SeatList({selectedSeats, setSelectedSeats, filmName}) {
         <View className={styles.seatListFooterButton}>
           <CustomButton
             width={150}
-            height={55}
+            height={155}
             content="Đặt vé"
             onPress={() => {
-              navigation.navigate('CinemaScreen');
+              console.log(selectedSeats, selectedSchedule);
+              holdTicket(selectedSchedule, selectedSeats);
+              if (selectedSeats.length > 0) {
+                setSelectedSeats('');
+                navigation.navigate('PaymentScreen');
+              } else alert("Vui lòng chọn chỗ ngồi","Vui lòng chọn chỗ ngồi")
             }}
           />
         </View>
