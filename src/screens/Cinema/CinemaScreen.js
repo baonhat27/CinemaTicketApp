@@ -19,8 +19,6 @@ export default function CinemaScreen({route}) {
   }, []);
   return (
     <View className={globalStyles.screen}>
-      <Text className={styles.cinema_header}>Chọn rạp chiếu phim</Text>
-
       <View className={styles.cinema_screen}>
         <View className={styles.cinema_list}>
           <FlatList

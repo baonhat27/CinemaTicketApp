@@ -1,10 +1,21 @@
 .schedules{
-     width: 160px;
+     width: 170px;
      height: 100px;
      color: red;
      margin:10px;
      background-color: #4e4e52;
-     border: 3px solid #c47b37;
+     border-radius: 10px;
+     padding: 10px;
+     display: flex;
+     justify-content: space-between;
+}
+.selected_schedules{
+     width: 170px;
+     height: 100px;
+     color: red;
+     margin:10px;
+     background-color: #4e4e52;
+     border: 2px solid #c47b37;
      border-radius: 10px;
      padding: 10px;
      display: flex;
