@@ -78,12 +78,11 @@ export default function BookingScreen({route}) {
             </Text>
             <MyDatePicker date={date} setDate={setDate} />
           </View>
-
-          <ScrollView
-            contentContainerStyle={styles.schedule_list}
-            horizontal={true}>
-            {scheduleList ? (
-              scheduleList.map(item => {
+          {scheduleList ? (
+            <ScrollView
+              contentContainerStyle={styles.schedule_list}
+              horizontal={true}>
+              {scheduleList?.map(item => {
                 return (
                   <Schedule
                     fromTime={FormatDate(item.FromTime)}
@@ -94,13 +93,13 @@ export default function BookingScreen({route}) {
                     handleClickSchedule={handleClickSchedule}
                   />
                 );
-              })
-            ) : (
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: 'bold'}}>
-                Không có lịch chiếu vào ngày này !
-              </Text>
-            )}
-          </ScrollView>
+              })}
+            </ScrollView>
+          ) : (
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: 'bold'}}>
+              Không có lịch chiếu vào ngày này !
+            </Text>
+          )}
         </View>
         {selectedSchedule && (
           <View className={styles.booking_seats_box}>
