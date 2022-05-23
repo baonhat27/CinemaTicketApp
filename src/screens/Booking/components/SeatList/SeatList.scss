@@ -15,21 +15,15 @@ $widthBox: 27px;
 
 .seatListContainer {
   margin-top: 20px;
-  margin-right: 10px;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.seatListLeft {
-  width: 148px;
+.seatListNumber {
+  width: 296px;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.seatListRight {
-  width: 148px;
-  flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .seatListItem {
