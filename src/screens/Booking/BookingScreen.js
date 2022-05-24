@@ -1,18 +1,18 @@
-import { View, Text, ScrollView, FlatList } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import {View, Text, ScrollView, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import globalStyles from '../../global.scss';
 import styles from './BookingScreen.scss';
 import Icon from 'react-native-vector-icons/Ionicons';
 import WrapImage from '../../components/Image/Image';
-import { getById } from '../../services/schedule';
+import {getById} from '../../services/schedule';
 import Schedule from './components/Schedule/Schedule';
 import MyDatePicker from './components/MyDatePicker/MyDatePicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FormatDate from '../../utils/FormatDate';
 import SeatList from './components/SeatList/SeatList';
-import { getByScheduleId } from '../../services/ticket';
+import {getByScheduleId} from '../../services/ticket';
 
-export default function BookingScreen({ route }) {
+export default function BookingScreen({route}) {
   const login_token = AsyncStorage.getItem('login_token');
   const cinema = route.params.cinema;
   const filmId = route.params.filmId;
@@ -64,11 +64,11 @@ export default function BookingScreen({ route }) {
           <WrapImage
             height={250}
             source={cinema.ImageUrls}
-            styles={{ borderRadius: 10 }}
+            styles={{borderRadius: 10}}
           />
         </View>
         <View className={styles.schedules}>
-          <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
+          <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>
             Lịch chiếu phim
           </Text>
           <View className={styles.date_choose}>
@@ -78,12 +78,11 @@ export default function BookingScreen({ route }) {
             </Text>
             <MyDatePicker date={date} setDate={setDate} />
           </View>
-
-          <ScrollView
-            contentContainerStyle={styles.schedule_list}
-            horizontal={true}>
-            {scheduleList ? (
-              scheduleList.map(item => {
+          {scheduleList ? (
+            <ScrollView
+              contentContainerStyle={styles.schedule_list}
+              horizontal={true}>
+              {scheduleList?.map(item => {
                 return (
                   <Schedule
                     fromTime={FormatDate(item.FromTime)}
@@ -94,17 +93,17 @@ export default function BookingScreen({ route }) {
                     handleClickSchedule={handleClickSchedule}
                   />
                 );
-              })
-            ) : (
-              <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold' }}>
-                Không có lịch chiếu vào ngày này !
-              </Text>
-            )}
-          </ScrollView>
+              })}
+            </ScrollView>
+          ) : (
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: 'bold'}}>
+              Không có lịch chiếu vào ngày này !
+            </Text>
+          )}
         </View>
         {selectedSchedule && (
           <View className={styles.booking_seats_box}>
-            <Text style={{ color: '#fff', fontSize: 20, fontWeight: 'bold' }}>
+            <Text style={{color: '#fff', fontSize: 20, fontWeight: 'bold'}}>
               Đặt chỗ
             </Text>
             <View className={styles.booking_seats}>
@@ -114,6 +113,7 @@ export default function BookingScreen({ route }) {
                 setSelectedSeats={setSelectedSeats}
                 filmName={filmName}
                 holdingSeats={holdingSeats}
+                filmId={filmId}
               />
             </View>
           </View>

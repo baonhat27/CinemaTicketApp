@@ -5,25 +5,40 @@ import styles from './PaymentScreen.scss';
 import globalStyles from '../../global.scss';
 import WrapImage from '../../components/Image/Image';
 import {CustomButton} from '../../components';
+import {holdTicket} from '../../services/ticket';
+import {getById} from '../../services/film';
 
-export default function PaymentScreen() {
+
+export default function PaymentScreen({route}) {
+  const filmId = route.params.filmId;
   const [method, setMethod] = useState('');
+  const [film, setFilm] = useState({
+    Category: '',
+    CreatedAt: '',
+    Description: '',
+    Id: '',
+    ImageUrls: '',
+    Length: '',
+    Name: '',
+    OpeningDay: '',
+    UpdatedAt: '',
+  });
+  const fetchAPI = async id => {
+    const res = await getById(id);
+    setFilm(res.data.data);
+  };
   useEffect(() => {
-    console.log(method);
-  }, [method]);
+    fetchAPI(filmId);
+  }, []);
+
+  const handleSubmit = () => {};
   return (
     <View className={globalStyles.screen}>
       <ScrollView content={styles.paymentScreen}>
         <View className={styles.ticket}>
-          <WrapImage
-            width={'30%'}
-            height={250}
-            source={
-              'https://nerdist.com/wp-content/uploads/2021/01/DoctorStrangeInTheMultiverseOfMadness_Teaser2_Printed_1-Sht_v4_lg.jpg'
-            }
-          />
+          <WrapImage width={'30%'} height={250} source={film.ImageUrls} />
           <View className={styles.ticketInfo}>
-            <Text className={styles.filmName}>John Wick</Text>
+            <Text className={styles.filmName}>{film.Name}</Text>
             <Text className={styles.time}>Mùng 1 tháng 6 năm 2022</Text>
             <Text className={styles.cinema}>Rạp chiếu phim quốc gia</Text>
             <Text className={styles.seat}>Ghế : A8 A9</Text>
@@ -42,11 +57,22 @@ export default function PaymentScreen() {
                 Ví Momo
               </Text>
               {method === 'MOMO' && (
-                <Icon
-                  name={'check'}
-                  size={23}
-                  style={{color: '#fff', marginLeft: 30}}
-                />
+                <>
+                  <Icon
+                    name={'check'}
+                    size={23}
+                    style={{color: '#fff', marginLeft: 30}}
+                  />
+                  <Text
+                    className={styles.info}
+                    style={
+                      method === 'MOMO'
+                        ? {color: '#fff', fontSize: 18, marginLeft: 10}
+                        : {}
+                    }>
+                    0376275484
+                  </Text>
+                </>
               )}
             </TouchableOpacity>
             <TouchableOpacity
@@ -58,11 +84,22 @@ export default function PaymentScreen() {
                 VN Pay
               </Text>
               {method === 'VNPAY' && (
-                <Icon
-                  name={'check'}
-                  size={23}
-                  style={{color: '#fff', marginLeft: 30}}
-                />
+                <>
+                  <Icon
+                    name={'check'}
+                    size={23}
+                    style={{color: '#fff', marginLeft: 30}}
+                  />
+                  <Text
+                    className={styles.info}
+                    style={
+                      method === 'VNPAY'
+                        ? {color: '#fff', fontSize: 18, marginLeft: 10}
+                        : {}
+                    }>
+                    0974606413
+                  </Text>
+                </>
               )}
             </TouchableOpacity>
             <TouchableOpacity
@@ -74,23 +111,35 @@ export default function PaymentScreen() {
                 Ngân hàng
               </Text>
               {method === 'BANKING' && (
-                <Icon
-                  name={'check'}
-                  size={23}
-                  style={{color: '#fff', marginLeft: 30}}
-                />
+                <>
+                  <Icon
+                    name={'check'}
+                    size={23}
+                    style={{color: '#fff', marginLeft: 30}}
+                  />
+                  <Text
+                    className={styles.info}
+                    style={
+                      method === 'BANKING'
+                        ? {color: '#fff', fontSize: 18, marginLeft: 10}
+                        : {}
+                    }>
+                    288866628386 MB Bank
+                  </Text>
+                </>
               )}
             </TouchableOpacity>
           </View>
         </View>
         <View className={styles.confirm}>
           <Text className={styles.policy}>
-            Tôi đồng ý với điều khoản sử dụng và mua vé xem phim
+            Tôi đồng ý với điều khoản và muốn mua vé
           </Text>
           <CustomButton
             width={300}
             height={60}
             content="Tôi đồng ý và tiếp tục"
+            onPress={handleSubmit}
           />
         </View>
       </ScrollView>
