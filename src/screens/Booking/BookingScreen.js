@@ -113,6 +113,7 @@ export default function BookingScreen({route}) {
                 setSelectedSeats={setSelectedSeats}
                 filmName={filmName}
                 holdingSeats={holdingSeats}
+                filmId={filmId}
               />
             </View>
           </View>
