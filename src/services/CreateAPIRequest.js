@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const HOST_URL = 'https://film-tickie.herokuapp.com/api/v1';
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQaG9uZSI6IjA5NzQ2MDY0MTMifQ.6tYFPgBrgi1NnSjtRSQ8i4nxHnSufKUAkjzUy2zhNqg"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJQaG9uZSI6IjA5NzEyMzEyMyJ9.aa0vFLDXop9tJowJCqNFYCs5XIy6paKXCIUYfF7zylQ"
 export default async function createAPIRequest({
   url,
   method,

@@ -21,10 +21,6 @@ export default function Schedule({
       <Text className={styles.time}>
         {fromTime} - {toTime}
       </Text>
-      <Text className={styles.slots_available}>
-        <Icon name="seat" size={20} style={{marginRight: 5}} />
-        25 slots available
-      </Text>
     </TouchableOpacity>
   );
 }

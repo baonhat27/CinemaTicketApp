@@ -1,6 +1,7 @@
-import {View, Text, ScrollView, FlatList} from 'react-native';
+import {View, Text, ScrollView, FlatList, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import globalStyles from '../../global.scss';
+import {useNavigation} from '@react-navigation/native';
 import styles from './BookingScreen.scss';
 import Icon from 'react-native-vector-icons/Ionicons';
 import WrapImage from '../../components/Image/Image';
@@ -10,22 +11,39 @@ import MyDatePicker from './components/MyDatePicker/MyDatePicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FormatDate from '../../utils/FormatDate';
 import SeatList from './components/SeatList/SeatList';
-import {getByScheduleId} from '../../services/ticket';
+import {getByScheduleId, holdTicket} from '../../services/ticket';
 
 export default function BookingScreen({route}) {
   const login_token = AsyncStorage.getItem('login_token');
   const cinema = route.params.cinema;
   const filmId = route.params.filmId;
   const filmName = route.params.filmName;
+  const navigation = useNavigation();
 
   const [date, setDate] = useState(new Date());
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [scheduleList, setScheduleList] = useState([]);
   const [selectedSchedule, setSelectedSchedule] = useState();
   const [holdingSeats, setHoldingSeats] = useState([]);
-  const handleClickSchedule = scheduleId => {
-    setSelectedSchedule(scheduleId);
+  const [orderedSeats, setOrderedSeats] = useState([]);
+  const handleClickBooking = async () => {
+    if (selectedSeats.length) {
+      const res = await holdTicket(selectedSchedule, selectedSeats);
+      console.log(res?.data);
+      if ((res.data.message = 'success')) {
+        navigation.navigate('PaymentScreen', {data: res.data.data});
+      }
+    } else {
+      Alert.alert('Vui lòng chọn ghế !');
+    }
+  };
+  const handleClickSchedule = async scheduleId => {
     setSelectedSeats([]);
+    setHoldingSeats([]);
+    setOrderedSeats([]);
+    setSelectedSchedule(scheduleId);
+
+    fetchAPI2(scheduleId);
   };
   // *****Call API to get schedule*****
   const fetchAPI = async (filmId, cinemaId, date) => {
@@ -33,16 +51,16 @@ export default function BookingScreen({route}) {
     setScheduleList(res.data.data);
   };
   // Call API to get ticket
-  const fetchAPI2 = async (scheduleId, token) => {
-    const res = await getByScheduleId(scheduleId, token);
+  const fetchAPI2 = async scheduleId => {
+    const res = await getByScheduleId(scheduleId);
     if (res.data.data.holding_seats) {
       setHoldingSeats(res.data.data.holding_seats);
     }
+    if (res.data.data.ordered_seats) {
+      setOrderedSeats(res.data.data.ordered_seats);
+    }
+    console.log(res.data.data);
   };
-  useEffect(() => {
-    fetchAPI2(selectedSchedule, login_token);
-  }, [selectedSchedule]);
-  // console.log(date.toISOString().slice(0, 10))
 
   useEffect(() => {
     const formatedDate = date.toISOString().slice(0, 10);
@@ -108,6 +126,8 @@ export default function BookingScreen({route}) {
             </Text>
             <View className={styles.booking_seats}>
               <SeatList
+                orderedSeats={orderedSeats}
+                handleClick={handleClickBooking}
                 selectedSeats={selectedSeats}
                 selectedSchedule={selectedSchedule}
                 setSelectedSeats={setSelectedSeats}
