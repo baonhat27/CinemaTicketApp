@@ -4,7 +4,15 @@ import React, {useState} from 'react';
 import styles from './SeatList.scss';
 import {CustomButton} from '../../../../components';
 
-export default function SeatList({selectedSeats, setSelectedSeats, filmName, filmId}) {
+export default function SeatList({
+  selectedSeats,
+  setSelectedSeats,
+  filmName,
+  filmId,
+  handleClick,
+  orderedSeats,
+  holdingSeats,
+}) {
   const navigation = useNavigation();
   const arraySeats = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -22,13 +30,6 @@ export default function SeatList({selectedSeats, setSelectedSeats, filmName, fil
       setSelectedSeats([...selectedSeats, seat]);
     }
   };
-  const handleClick = () => {
-    if (selectedSeats.length) {
-      navigation.navigate('PaymentScreen',{filmId: filmId});
-    } else {
-      Alert.alert('Vui lòng chọn ghế !');
-    }
-  };
   return (
     <View className={styles.seatList}>
       <View className={styles.seatListHeader}>
@@ -37,11 +38,11 @@ export default function SeatList({selectedSeats, setSelectedSeats, filmName, fil
       <View className={styles.seatListContainer}>
         <View className={styles.seatListNumber}>
           {arraySeats.map((seat, index) => {
-            if (index + 1 === 1 || index + 1 === 33) {
+            if (orderedSeats && orderedSeats.includes(index + 1)) {
               return <View style={styles.seatListItemReserved} key={index} />;
             }
-            if (index + 1 === 12 || index + 1 === 23) {
-              return <View style={styles.seatListItemReserved} key={index} />;
+            if (holdingSeats && holdingSeats.includes(index + 1)) {
+              return <View style={styles.seatListItemHolding} key={index} />;
             }
             return (
               <TouchableOpacity
@@ -65,6 +66,10 @@ export default function SeatList({selectedSeats, setSelectedSeats, filmName, fil
         <View className={styles.seatListNoteBox}>
           <View className={styles.seatListNoteReserved} />
           <Text className={styles.seatListNoteText}>Đã đặt</Text>
+        </View>
+        <View className={styles.seatListNoteBox}>
+          <View className={styles.seatListNoteHolding} />
+          <Text className={styles.seatListNoteText}>Đang giữ chỗ</Text>
         </View>
         <View className={styles.seatListNoteBox}>
           <View className={styles.seatListNoteSelected} />

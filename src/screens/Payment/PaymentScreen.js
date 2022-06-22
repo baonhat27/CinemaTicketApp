@@ -5,44 +5,32 @@ import styles from './PaymentScreen.scss';
 import globalStyles from '../../global.scss';
 import WrapImage from '../../components/Image/Image';
 import {CustomButton} from '../../components';
-import {holdTicket} from '../../services/ticket';
 import {getById} from '../../services/film';
-
+import FormatDate from '../../utils/FormatDate';
 
 export default function PaymentScreen({route}) {
-  const filmId = route.params.filmId;
+  const data = route.params.data;
   const [method, setMethod] = useState('');
-  const [film, setFilm] = useState({
-    Category: '',
-    CreatedAt: '',
-    Description: '',
-    Id: '',
-    ImageUrls: '',
-    Length: '',
-    Name: '',
-    OpeningDay: '',
-    UpdatedAt: '',
-  });
-  const fetchAPI = async id => {
-    const res = await getById(id);
-    setFilm(res.data.data);
-  };
-  useEffect(() => {
-    fetchAPI(filmId);
-  }, []);
+  const {cinemaName, filmName, fromTime, toTime, price, seats, filmImg} = data;
+  const date = new Date(fromTime);
 
   const handleSubmit = () => {};
   return (
     <View className={globalStyles.screen}>
       <ScrollView content={styles.paymentScreen}>
         <View className={styles.ticket}>
-          <WrapImage width={'30%'} height={250} source={film.ImageUrls} />
+          <WrapImage width={'30%'} height={250} source={filmImg} />
           <View className={styles.ticketInfo}>
-            <Text className={styles.filmName}>{film.Name}</Text>
-            <Text className={styles.time}>Mùng 1 tháng 6 năm 2022</Text>
-            <Text className={styles.cinema}>Rạp chiếu phim quốc gia</Text>
-            <Text className={styles.seat}>Ghế : A8 A9</Text>
-            <Text className={styles.price}> Tổng cộng : 100000VNĐ</Text>
+            <Text className={styles.filmName}>{filmName}</Text>
+            <Text className={styles.time}>
+              {date.getDate()} tháng {date.getMonth() + 1} năm{' '}
+              {date.getFullYear()}
+            </Text>
+            <Text className={styles.cinema}>{cinemaName}</Text>
+            <Text className={styles.seat}>
+              Ghế : {seats.map(seat => ` ${seat}`)}
+            </Text>
+            <Text className={styles.price}> Tổng cộng : {price}VNĐ</Text>
           </View>
         </View>
         <View className={styles.payment}>

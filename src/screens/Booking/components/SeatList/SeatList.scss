@@ -60,6 +60,14 @@ $widthBox: 27px;
   margin-right: 10px;
   margin-bottom: 10px;
 }
+.seatListItemHolding {
+  background-color: #4c08f8;
+  height: $heightBox;
+  width: $widthBox;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 
 .seatListNote {
   flex-direction: row;
@@ -91,7 +99,12 @@ $widthBox: 27px;
   width: 17px;
   border-radius: 5px;
 }
-
+.seatListNoteHolding {
+  background-color: #4c08f8;
+  height: 17px;
+  width: 17px;
+  border-radius: 5px;
+}
 .seatListNoteSelected {
   background-color: #d98639;
   height: 17px;
@@ -119,7 +132,7 @@ $widthBox: 27px;
   line-height: 30px;
 }
 .filmName {
-  text-transform: uppercase;;
+  text-transform: uppercase;
   color: #fff;
   font-weight: 700;
   font-size: 20px;
