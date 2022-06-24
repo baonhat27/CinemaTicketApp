@@ -4,6 +4,7 @@ import styles from './CinemaScreen.scss';
 import globalStyles from '../../global.scss';
 import {getByFilmId} from '../../services/cinema';
 import Cinema from './components/Cinema';
+import RootLayout from '../../rootLayout';
 
 export default function CinemaScreen({route}) {
   const [cinema, setCinema] = useState([]);
@@ -18,7 +19,7 @@ export default function CinemaScreen({route}) {
     fetchAPI(filmId);
   }, []);
   return (
-    <View className={globalStyles.screen}>
+    <RootLayout>
       <View className={styles.cinema_screen}>
         <View className={styles.cinema_list}>
           <FlatList
@@ -34,6 +35,6 @@ export default function CinemaScreen({route}) {
           />
         </View>
       </View>
-    </View>
+    </RootLayout>
   );
 }
