@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Keyboard,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './ConfirmLoginScreen.scss';
@@ -27,13 +28,13 @@ export default function ConfirmLoginScreen({route}) {
       phone: phoneNumber,
     };
     const {data, success} = await login(dataUser);
-    console.log(data.data, success);
     if (success && data.data.token) {
-      navigation.popToTop()
+      navigation.popToTop();
       await AsyncStorage.setItem('token_login', data.data.token);
-      await AsyncStorage.setItem('username', username);
+      await AsyncStorage.setItem('username', String(username));
       console.log('login success!');
     } else {
+      Alert.alert('Sai ma OTP');
       console.log('login fail!');
     }
   };

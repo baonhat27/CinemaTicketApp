@@ -12,6 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FormatDate from '../../utils/FormatDate';
 import SeatList from './components/SeatList/SeatList';
 import {getByScheduleId, holdTicket} from '../../services/ticket';
+import RootLayout from '../../rootLayout';
 
 export default function BookingScreen({route}) {
   const login_token = AsyncStorage.getItem('login_token');
@@ -26,23 +27,26 @@ export default function BookingScreen({route}) {
   const [selectedSchedule, setSelectedSchedule] = useState();
   const [holdingSeats, setHoldingSeats] = useState([]);
   const [orderedSeats, setOrderedSeats] = useState([]);
+  const [totalSeat, setTotalSeats] = useState(0);
   const handleClickBooking = async () => {
     if (selectedSeats.length) {
       const res = await holdTicket(selectedSchedule, selectedSeats);
-      console.log(res?.data);
       if ((res.data.message = 'success')) {
-        navigation.navigate('PaymentScreen', {data: res.data.data});
+        navigation.navigate('PaymentScreen', {
+          data: res.data.data,
+          scheduleId: selectedSchedule,
+        });
       }
     } else {
       Alert.alert('Vui lòng chọn ghế !');
     }
   };
+
   const handleClickSchedule = async scheduleId => {
     setSelectedSeats([]);
     setHoldingSeats([]);
     setOrderedSeats([]);
     setSelectedSchedule(scheduleId);
-
     fetchAPI2(scheduleId);
   };
   // *****Call API to get schedule*****
@@ -53,13 +57,14 @@ export default function BookingScreen({route}) {
   // Call API to get ticket
   const fetchAPI2 = async scheduleId => {
     const res = await getByScheduleId(scheduleId);
+    console.log(res.data.data);
     if (res.data.data.holding_seats) {
       setHoldingSeats(res.data.data.holding_seats);
     }
     if (res.data.data.ordered_seats) {
       setOrderedSeats(res.data.data.ordered_seats);
     }
-    console.log(res.data.data);
+    setTotalSeats(res.data.data.numOfColumns * res.data.data.numOfRows);
   };
 
   useEffect(() => {
@@ -67,7 +72,7 @@ export default function BookingScreen({route}) {
     fetchAPI(filmId, cinema.Id, formatedDate);
   }, [date]);
   return (
-    <View className={globalStyles.screen}>
+    <RootLayout>
       <ScrollView className={styles.booking_screen}>
         <View className={styles.booking_screen_header}>
           <Text className={styles.cinema_name} numberOfLines={2}>
@@ -103,11 +108,11 @@ export default function BookingScreen({route}) {
               {scheduleList?.map(item => {
                 return (
                   <Schedule
-                    fromTime={FormatDate(item.FromTime)}
-                    toTime={FormatDate(item.ToTime)}
+                    fromTime={FormatDate(item.fromTime)}
+                    toTime={FormatDate(item.toTime)}
                     selectedSchedule={selectedSchedule}
-                    key={item.Id}
-                    scheduleId={item.Id}
+                    key={item.id}
+                    scheduleId={item.id}
                     handleClickSchedule={handleClickSchedule}
                   />
                 );
@@ -134,11 +139,12 @@ export default function BookingScreen({route}) {
                 filmName={filmName}
                 holdingSeats={holdingSeats}
                 filmId={filmId}
+                totalSeat={totalSeat}
               />
             </View>
           </View>
         )}
       </ScrollView>
-    </View>
+    </RootLayout>
   );
 }

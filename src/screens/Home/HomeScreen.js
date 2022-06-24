@@ -9,6 +9,7 @@ import ComingFilm from './components/ComingFilm/ComingFilm';
 import {getByCate} from '../../services/film';
 import WrapImage from '../../components/Image/Image';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import RootLayout from '../../rootLayout';
 
 export default function HomeScreen() {
   const [category, setCategory] = useState('Action');
@@ -35,36 +36,24 @@ export default function HomeScreen() {
   }, [category]);
 
   return (
-    <HomeContext.Provider
-      value={{
-        handleCategory,
-        nowShowingFilm,
-        setSelectedId,
-        selectedId,
-        onPressFunction,
-        flatListRef,
-      }}>
-      <ScrollView contentContainerStyle={globalStyles.screen}>
-        <View className={styles.screen}>
-          {/* {token_login ? (
-          <View className={styles.home_avatar}>
-            <WrapImage
-            width={60}
-            height={60}
-            source={
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjcV9dzXaOjNsfMc-GPxEdjWcAOFtV8x_gLn2KqpXN6pGgOa796SZCdyOjoysRYCPw1-s&usqp=CAU'
-            }
-            styles={{ borderRadius: 100, position: 'absolute', right: 0}}
-          />
+    <RootLayout>
+      <HomeContext.Provider
+        value={{
+          handleCategory,
+          nowShowingFilm,
+          setSelectedId,
+          selectedId,
+          onPressFunction,
+          flatListRef,
+        }}>
+        <ScrollView contentContainerStyle={globalStyles.screen}>
+          <View className={styles.screen1}>
+            <ComingFilm />
+            <Category />
+            <ShowingFilm />
           </View>
-        ) : (
-          <Text className={styles.home_header}>Đăng nhập</Text>
-        )} */}
-          <ComingFilm />
-          <Category />
-          <ShowingFilm />
-        </View>
-      </ScrollView>
-    </HomeContext.Provider>
+        </ScrollView>
+      </HomeContext.Provider>
+    </RootLayout>
   );
 }

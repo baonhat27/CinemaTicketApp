@@ -5,6 +5,8 @@ import CinemaScreen from './Cinema/CinemaScreen';
 import BookingScreen from './Booking/BookingScreen';
 import ConfirmLoginScreen from './ConfirmLogin/ConfirmLoginScreen';
 import PaymentScreen from './Payment/PaymentScreen';
+import UserScreen from './User/UserScreen';
+import TicketHistory from './TicketHistory/TicketHistory';
 
 export {
   HomeScreen,
@@ -14,4 +16,6 @@ export {
   ConfirmLoginScreen,
   BookingScreen,
   PaymentScreen,
+  UserScreen,
+  TicketHistory
 };
